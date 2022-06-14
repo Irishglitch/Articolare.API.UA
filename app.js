@@ -16,18 +16,18 @@ require('dotenv/config')
 
 // Middleware & Routers
 app.use(bodyParser.json())
-// const userAuthRoute = require('./src/routes/auth')
+const userAuthRoute = require('./src/routes/auth')
 
 // Endpoints
-// app.use('/user', userAuthRoute)
+app.use('/', userAuthRoute)
 
 
 // Connection to the mongoDB
-// mongoose.connect(process.env.DB_CONNECTOR, () =>{
-//     console.log('DB connection is running!')
-// })
+mongoose.connect(process.env.DB_CONNECTOR, () =>{
+    console.log('DB connection is running!')
+})
 
 // Port
-// app.listen(3000, () =>{
-//     console.log('Server is running!')
-// })
+app.listen(3000, () =>{
+    console.log('Server is running!')
+})
