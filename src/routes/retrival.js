@@ -24,7 +24,7 @@ router.get('/user', accessVerify, async (req, res) => {
    try {
        const userFound = await User.findById(req.user._id)
        if(userFound){
-           console.log('here')
+           res.send(userFound.name & userFound.email)
        } else {
            console.log("not found here")
        }
