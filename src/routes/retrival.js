@@ -20,19 +20,17 @@ const {response} = require('express') // Ability to return something to the user
 
 // Access view
 // Retrieve user information 'Email', 'Name' and 'Account Type'
-router.get('/user', async(req, res) => {
-    try {
-        const userDataRetrival = await User.findOne(req.user._id)
-        if (userDataRetrival) {
-            console.log('here')
-        } else {
-            console.log('else here')
-        }
-        
-    } catch (error) {
-        console.log(error.stack)
-    }
-    
+router.get('/user', accessVerify, async (req, res) => {
+   try {
+       const userFound = await User.findById(req.user._id)
+       if(userFound){
+           console.log('here')
+       } else {
+           console.log("not found here")
+       }
+   } catch (error) {
+       res.status(400)
+   }
 })
 // Model Export
 module.exports = router

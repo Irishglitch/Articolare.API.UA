@@ -24,3 +24,6 @@ function tokenAuthentication(req,res,next){
         return res.status(401).send({message:'Please login with a valid account. Ivalid access'})
     }
 }
+
+// Module Exports
+module.exports = tokenAuthentication
