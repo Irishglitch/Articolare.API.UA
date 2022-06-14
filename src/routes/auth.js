@@ -53,5 +53,31 @@ router.post('/register', async(req, res) => {
      }
 })
 
+// User login - will require a token to be passed - this will have to be changed
+router.post('/login', async(req, res) => {
+    const {error} = userLoginValidation(req.body)
+    if(error){
+        // Validation 1 - Summarised error message
+        return res.status(400).send({message:error['details'][0]['message']})
+    }
+
+    // Validation 2 - Check user is not registered
+    const userExists = await User.findOne({email:req.body.email})
+    if(!userExists){
+        return res.status(400).send({message:'Email account not found. Please log in with a valid account'})
+    }
+
+    // Validation 3 - Password decription and validation
+    const userPasswordValidation = await bcryptjs.compare(req.body.password, userExists.password)
+    if(!userPasswordValidation){
+        return res.status(400).send({message:'Password is wrong'})
+    }
+
+    // Auth-Token Generation
+    const authToken = jsonwebtoken.sign({_id:userExists._id}, process.env.TOKEN_SECRET)
+    res.header('auth-token', authToken).send({'auth-token':authToken})
+    
+})
+ 
 // Model Export
 module.exports = router
