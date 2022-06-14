@@ -1,0 +1,31 @@
+{
+  "name": "articolare.api.ua",
+  "version": "1.0.0",
+  "description": "Articolare API for user management and user related access.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Irishglitch/Articolare.API.UA.git"
+  },
+  "author": "Murilo Silvestre | Property of Articolare Ltd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Irishglitch/Articolare.API.UA/issues"
+  },
+  "homepage": "https://github.com/Irishglitch/Articolare.API.UA#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.8",
+    "nodemon": "^2.0.16"
+  }
+}
