@@ -17,9 +17,11 @@ require('dotenv/config')
 // Middleware & Routers
 app.use(bodyParser.json())
 const userAuthRoute = require('./src/routes/auth')
+const userDetailsGet = require('./src/routes/retrival')
 
 // Endpoints
-app.use('/', userAuthRoute)
+app.use('/', userAuthRoute) // For user access login and register
+app.use('/', userDetailsGet)
 
 
 // Connection to the mongoDB

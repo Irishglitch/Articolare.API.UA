@@ -14,7 +14,7 @@ const bcryptjs = require('bcryptjs')
 const jsonwebtoken = require('jsonwebtoken')
 
 const User = require('../models/User')
-const {userRegistrationValidation, userLoginValidation} = require('../validation/validation') // All validations for login and registration.
+const {userRegistrationValidation, userLoginValidation} = require('../validations/validation') // All validations for login and registration.
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
 
 
@@ -37,10 +37,9 @@ router.post('/register', async(req, res) => {
  
      // Inserting data into DB.
      const addNewUser = new User({
-        firstName:req.body.firstName,
+        name:req.body.name,
         lastName:req.body.lastName,
         email:req.body.email,
-        adminStatus:false,
         password:hashedPassword
      })
 
