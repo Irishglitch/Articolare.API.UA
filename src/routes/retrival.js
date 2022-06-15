@@ -10,6 +10,7 @@
 const express = require('express')
 const router = express.Router()
 const accessVerify = require('../validations/tokenVerification') // Token verification.
+const userDataFunction = require('../validations/functions')
 
 // Middleware and routers
 const User = require('../models/User')
@@ -21,12 +22,17 @@ const {response} = require('express') // Ability to return something to the user
 // Access view
 // Retrieve user information 'Email', 'Name' and 'Account Type'
 router.get('/user', accessVerify, async (req, res) => {
+    // The the endpoint collects the id of the user logged in, and once logged in passes to the function.
    try {
        const userFound = await User.findById(req.user._id)
-       if(userFound){
-           res.send(userFound.name & userFound.email)
+
+       // Passing the user detail to the function
+       const getUserDetail = userDataFunction.getUserName(userFound)
+
+       if(getUserDetail){
+           res.send(getUserDetail)
        } else {
-           console.log("not found here")
+           res.status(400)
        }
    } catch (error) {
        res.status(400)
