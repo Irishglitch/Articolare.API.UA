@@ -8,7 +8,10 @@
 
 // Libraries
 const express = require('express')
+const res = require('express/lib/response')
 const router = express.Router()
+const {default: mongoose} = require('mongoose') // Access to DB.
+const User = require('../models/User')
 
 
 // Functions
@@ -17,7 +20,7 @@ function getUserName (item) {
     // The endpoint provides the user detail. Function will only collected and display the information. 
     let userDetail = []
     let accountT = 'Premium'
-    
+
     // Checking account type
     if(!item.accountTypePremium){
         accountT = 'Free'
@@ -30,7 +33,15 @@ function getUserName (item) {
         accountType: accountT
     })
     return userDetail;
-
 }
 
-module.exports = {getUserName}
+// Get user data 'Name', 'LastNem', 'Email', and 'Account type'
+function delUserAccount (item) {
+    // The endpoint provides the user detail. Function will only collected and display the information. 
+
+    const test = User.findOneAndRemove(item)
+    console.log("here")
+    return userDetail;
+}
+
+module.exports = {getUserName, delUserAccount}

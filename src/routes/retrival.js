@@ -26,7 +26,7 @@ router.get('/user', accessVerify, async (req, res) => {
    try {
        const userFound = await User.findById(req.user._id)
 
-       // Passing the user detail to the function
+       // Passing the user detail to the function.
        const getUserDetail = userDataFunction.getUserName(userFound)
 
        if(getUserDetail){
@@ -38,5 +38,27 @@ router.get('/user', accessVerify, async (req, res) => {
        res.status(400)
    }
 })
+
+// Delete user account
+router.delete('/delete/:id', function(req, res){
+    // Variable for the user id.
+    let id = req.params.id;
+    
+    // Delete user account.
+    User.findOneAndRemove({_id: id}, function(error){
+        if(error){
+            console.log(error);
+            return res.status(500).send();
+        }
+        return res.status(200).send();
+    })
+})
+
+
+
+
+
+
+
 // Model Export
 module.exports = router
