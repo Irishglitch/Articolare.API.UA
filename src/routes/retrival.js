@@ -21,7 +21,7 @@ const {response} = require('express') // Ability to return something to the user
 
 // Access view
 // Retrieve user information 'Email', 'Name' and 'Account Type'
-router.get('/user', accessVerify, async (req, res) => {
+router.get('/users', accessVerify, async (req, res) => {
     // The the endpoint collects the id of the user logged in, and once logged in passes to the function.
    try {
        const userFound = await User.findById(req.user._id)
