@@ -20,18 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ce7f109-63bd-4a8d-9a81-371614026d34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/is-ci" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/is-ci" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mime" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nodemon" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nodemon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nodetouch" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nodetouch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nopt" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nopt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/semver" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/make-dir/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/make-dir/node_modules/.bin/semver" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/package-json/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/package-json/node_modules/.bin/semver" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/semver-diff/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/semver-diff/node_modules/.bin/semver" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/update-notifier/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/update-notifier/node_modules/.bin/semver" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/auth.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +45,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.google.cloudcode.ide_session_index" value="20221023_0001" />
+    <property name="com.google.cloudcode.ide_session_index" value="20221023_0002" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -99,7 +90,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666521547541</updated>
-      <workItem from="1666521550508" duration="3711000" />
+      <workItem from="1666521550508" duration="6803000" />
     </task>
     <servers />
   </component>
@@ -122,22 +113,22 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2622" y="148" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666522538741" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1666524409139">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1666528611713">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666524409139" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1666524409138">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666528611713" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1666528611712">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666524409138" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1666524409138">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666528611712" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1666528611712">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666524409138" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1666524409139">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666528611712" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1666528611712">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666524409139" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666528611712" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1666524409139">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -190,15 +181,29 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2601" y="261" width="540" height="524" key="StructurePopup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666524162897" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1666526586483">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666526586483" />
+    <state x="2587" y="119" width="585" height="801" key="find.popup" timestamp="1666526240263">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2587" y="119" width="585" height="801" key="find.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1666526240263" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/routes/auth.js</url>
-          <line>22</line>
+          <line>23</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/models/User.js</url>
+          <line>71</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

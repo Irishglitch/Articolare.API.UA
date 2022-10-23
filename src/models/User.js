@@ -41,11 +41,44 @@ const userSchema = mongoose.Schema({
         type:Boolean,
         default:false
     },
-    date:{
+    isActive:{ // All accounts are going to be set as 'False' if paid, change to True.
+        type:Boolean,
+        required: true,
+        default:false
+    },
+    changePasswordNextAccess:{ // Forces user to redefine the password on the next access.
+        type:Boolean,
+        required: true,
+        default:false
+    },
+    createdAt:{
         type:Date,
+        required: true,
         default:Date.now
+    },
+    updatedAt:{
+        type:Date,
+        required: false,
+        default:null
     }
 })
-
+const User = mongoose.model('users', userSchema)
+function getNewUser(
+    name,
+    lastName,
+    email,
+    hashedPassword
+){
+    return new User({
+        name:name,
+        lastName:lastName,
+        email:email,
+        password:hashedPassword
+    })
+}
 // Module Exports
-module.exports = mongoose.model('users', userSchema)
+module.exports ={
+    User: User,
+    GetNewUser:getNewUser
+}
+

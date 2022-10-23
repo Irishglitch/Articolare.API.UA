@@ -13,7 +13,8 @@ const router = express.Router()
 const bcryptjs = require('bcryptjs')
 const jsonwebtoken = require('jsonwebtoken')
 
-const User = require('../models/User')
+const User = require('../models/User').User
+const UserHandler = require('../models/User')
 const {userRegistrationValidation, userLoginValidation} = require('../validations/validation') // All validations for login and registration.
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
 
@@ -34,14 +35,20 @@ router.post('/register', async(req, res) => {
      // Creating a hash representation for user password.
      const salt = await bcryptjs.genSalt(8)
      const hashedPassword = await bcryptjs.hash(req.body.password,salt)
- 
+
      // Inserting data into DB.
-     const addNewUser = new User({
-        name:req.body.name,
-        lastName:req.body.lastName,
-        email:req.body.email,
-        password:hashedPassword
-     })
+    const addNewUser = UserHandler.GetNewUser(
+        req.body.name,
+        req.body.lastName,
+        req.body.email,
+        hashedPassword
+    )
+     // const addNewUser = new User({
+     //    name:req.body.name,
+     //    lastName:req.body.lastName,
+     //    email:req.body.email,
+     //    password:hashedPassword
+     // })
 
      // Try catch to validate and enter data into DB.
      try{
