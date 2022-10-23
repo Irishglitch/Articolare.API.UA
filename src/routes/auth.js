@@ -15,9 +15,11 @@ const jsonwebtoken = require('jsonwebtoken')
 
 const User = require('../models/User').User
 const UserHandler = require('../models/User')
-const {userRegistrationValidation, userLoginValidation} = require('../validations/validation') // All validations for login and registration.
+const {userRegistrationValidation, userLoginValidation, passwordRecoveryValidation} = require('../validations/validation') // All validations for login and registration.
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
+const { v4: uuidv4 } = require('uuid');
 
+;
 
 // User registration
 router.post('/register', async(req, res) => {
@@ -43,13 +45,6 @@ router.post('/register', async(req, res) => {
         req.body.email,
         hashedPassword
     )
-     // const addNewUser = new User({
-     //    name:req.body.name,
-     //    lastName:req.body.lastName,
-     //    email:req.body.email,
-     //    password:hashedPassword
-     // })
-
      // Try catch to validate and enter data into DB.
      try{
          const userAddedDB = await addNewUser.save()
@@ -84,6 +79,52 @@ router.post('/login', async(req, res) => {
     res.header('auth-token', authToken).send({'auth-token':authToken})
     
 })
- 
+
+router.patch('/recoveryPassword',async(req, res) => {
+    const {error} = passwordRecoveryValidation(req.body)
+    if(error) {
+        // Validation 1 - Summarised error message
+        return res.status(400).send({message: error['details'][0]['message']})
+    }
+    const curUser = await User.findOne({email:req.body.email})
+    if(curUser){
+        const now = Date.now();
+        curUser.passwordRecoveryToken = uuidv4();
+        curUser.recoveryTokenExpireDate = (now + 86400000);
+        curUser.updatedAt = now;
+        curUser.save();
+    }
+
+    res.end();
+
+})
+
+
+function sendMail(){
+    var nodemailer = require('nodemailer');
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'youremail@gmail.com',
+            pass: 'yourpassword'
+        }
+    });
+
+    var mailOptions = {
+        from: 'youremail@gmail.com',
+        to: 'myfriend@yahoo.com',
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+}
 // Model Export
 module.exports = router

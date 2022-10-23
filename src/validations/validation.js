@@ -33,7 +33,15 @@ const userLoginValidation = (data) =>{
     return userLoginSchemaValidation.validate(data)
 }
 
+const passwordRecoveryValidation = (data) =>{
+    const userPasswordRecoveryValidation = joi.object({
+        email:joi.string().required().min(3).max(256).email()
+    })
+    // returning the login user validation
+    return userPasswordRecoveryValidation.validate(data)
+}
 
 // Module Exports
 module.exports.userRegistrationValidation = userRegistrationValidation
 module.exports.userLoginValidation = userLoginValidation
+module.exports.passwordRecoveryValidation = passwordRecoveryValidation

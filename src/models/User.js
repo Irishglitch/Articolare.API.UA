@@ -51,6 +51,18 @@ const userSchema = mongoose.Schema({
         required: true,
         default:false
     },
+    passwordRecoveryToken:{
+        type:String,
+        required:false,
+        min:36,
+        max:36,
+        default: null
+    },
+    recoveryTokenExpireDate:{
+        type:Date,
+        required: false,
+        default:null
+    },
     createdAt:{
         type:Date,
         required: true,
