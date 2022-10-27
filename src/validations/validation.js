@@ -35,7 +35,8 @@ const userLoginValidation = (data) =>{
 
 const passwordRecoveryValidation = (data) =>{
     const userPasswordRecoveryValidation = joi.object({
-        email:joi.string().required().min(3).max(256).email()
+        email:joi.string().required().min(3).max(256).email(),
+        password:joi.string().required()
     })
     // returning the login user validation
     return userPasswordRecoveryValidation.validate(data)

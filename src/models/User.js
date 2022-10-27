@@ -90,7 +90,8 @@ function getNewUser(
         name:name,
         lastName:lastName,
         email:email,
-        password:hashedPassword
+        password:hashedPassword,
+        isActive: false
     })
 }
 // Module Exports
