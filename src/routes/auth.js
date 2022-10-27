@@ -79,7 +79,7 @@ router.post('/login', async(req, res) => {
     
 })
 
-router.patch('/recoveryPassword',async(req, res) => {
+router.put('/recoveryPassword',async(req, res) => {
     const {error} = passwordRecoveryValidation(req.body)
     if(error) {
         // Validation 1 - Summarised error message
@@ -92,21 +92,20 @@ router.patch('/recoveryPassword',async(req, res) => {
         curUser.recoveryTokenExpireDate = (now + 86400000);
         curUser.updatedAt = now;
         curUser.save();
+        const body = getPassRecoveryMailBody(curUser.name, curUser.passwordRecoveryToken);
+        sendMail(curUser.email, 'Articolare - recovery password.', body);
     }
-    const body = getPassRecoveryMailBody(curUser.name, curUser.passwordRecoveryToken);
-    sendMail(curUser.email, 'Articolare - recovery password.', body);
 
     res.end();
 })
 
 router.patch('/recoveryPassword/:token',async(req, res) => {
-    // const {error} = passwordRecoveryValidation(req.body)
-    //TODO CREATE REQUIRED VALIDATION
+    const {error} = passwordRecoveryValidation(req.body)
+    if(error) {
+        // Validation 1 - Summarised error message
+        return res.status(400).send({message: error['details'][0]['message']})
+    }
 
-    // if(error) {
-    //     // Validation 1 - Summarised error message
-    //     return res.status(400).send({message: error['details'][0]['message']})
-    // }
     const token = req.params['token'];
     const curUser = await User.findOne({passwordRecoveryToken:token})
     if(curUser){
@@ -128,14 +127,42 @@ router.patch('/recoveryPassword/:token',async(req, res) => {
         return;
     }
     else{
-        res.status(400).send('Error: Invalid password recovery token.')
+        res.status(400).send({message: 'Error: Invalid password recovery token.'})
         return;
     }
 
 })
 
+router.delete('/users/:userId',async(req, res) => {
+    const userId = req.params['userId'];
+    if(!userId) {
+        return res.status(400).send({message: 'Invalid userid.'})
+    }
+    try {
+        mongoose.Types.ObjectId(userId)
+    }
+    catch (e){
+        res.status(400).send({message: 'Error:  invalid userId'});
+        return;
+    }
+    const curUser = await User.findOne({_id: userId})
+    if(curUser){
+        const now = Date.now();
+        curUser.isActive = false;
+        curUser.updatedAt = now;
+        curUser.save();
+        const body = getDeletedAccountMailBody(curUser.name, curUser.passwordRecoveryToken);
+        sendMail(curUser.email, 'Articolare - account deactivation.', body);
 
-function sendMail(mailAddres,subject, body){ //TODO CREATE EMAIL SERVICE WITH DYNAMIC TEMPLATES
+        res.end();
+
+    }
+    else {
+        res.status(400).send('Error:  userId not found.');
+    }
+})
+
+function sendMail(mailAddres,subject, body){
     const user = process.env.MAIL_ADDRESS;
     const pass = process.env.PASS;
     var nodemailer = require('nodemailer');
@@ -167,6 +194,11 @@ function sendMail(mailAddres,subject, body){ //TODO CREATE EMAIL SERVICE WITH DY
 function getPassRecoveryMailBody(userName, token){
     const link = `${baseAddress}/recoveryPassword/${token}`
     const mailBase = `<!DOCTYPE htmlPUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Articolare</title><style type="text/css">body{Margin:0;padding:0;background-color:#fff}table{border-spacing:0}td{padding:0}img{border:0}.wrapper{width:100%;table-layout:fixed;background-color:#fff;padding-bottom:40px}.webkit{max-width:600px;background-color:#fff}.outer{Margin:0 auto;width:100%;max-width:600px;border-spacing:0;font-family:sans-serif;color:#4a4a4a}</style></head><body><center class="wrapper"><div class="webkit"><table class="outer" align="center"><tr><td><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:center"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/mainLogoLight.png" width="180" alt="Logo" title="Logo"></a></td></tr></table></td></tr><tr><td><br><br><p>Hello ${userName},</p><p style="max-width:100;font-weight:400">This is a password recovery email.</p><br><p>${link}</p></td></tr><tr><td><br><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:left"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/better-writing.png" width="600" alt="Logo" title="Logo"></a></td></tr></table><p style="font-size:13px">By clicking on the link above you are agreeing to our terms andconditions.</p><p style="font-size:13px">All rights reserved. Copyright © 2021 Foireann | Made with<spam style="color:red;font-size:large">♥</spam>by ourteam in London, Lisbon, &Milano.</p></td></tr></table></div></center></body></html>`
+    return mailBase;
+}
+
+function getDeletedAccountMailBody(userName, token){
+    const mailBase = `<!DOCTYPE htmlPUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Articolare</title><style type="text/css">body{Margin:0;padding:0;background-color:#fff}table{border-spacing:0}td{padding:0}img{border:0}.wrapper{width:100%;table-layout:fixed;background-color:#fff;padding-bottom:40px}.webkit{max-width:600px;background-color:#fff}.outer{Margin:0 auto;width:100%;max-width:600px;border-spacing:0;font-family:sans-serif;color:#4a4a4a}</style></head><body><center class="wrapper"><div class="webkit"><table class="outer" align="center"><tr><td><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:center"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/mainLogoLight.png" width="180" alt="Logo" title="Logo"></a></td></tr></table></td></tr><tr><td><br><br><p>Hello ${userName},</p><p style="max-width:100;font-weight:400">This an account deactivation email.</p><br></td></tr><tr><td><br><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:left"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/better-writing.png" width="600" alt="Logo" title="Logo"></a></td></tr></table><p style="font-size:13px">By clicking on the link above you are agreeing to our terms andconditions.</p><p style="font-size:13px">All rights reserved. Copyright © 2021 Foireann | Made with<spam style="color:red;font-size:large">♥</spam>by ourteam in London, Lisbon, &Milano.</p></td></tr></table></div></center></body></html>`
     return mailBase;
 }
 module.exports = router

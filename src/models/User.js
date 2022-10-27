@@ -13,6 +13,10 @@ const mongoose = require('mongoose')
 // Data Model
 const userSchema = mongoose.Schema({
     // This is the actual schema used within the database.
+    _id:{
+        type:mongoose.Types.ObjectId,
+        required:true
+    },
     email:{
         type:String,
         required:true, 
@@ -82,6 +86,7 @@ function getNewUser(
     hashedPassword
 ){
     return new User({
+        _id: mongoose.Types.ObjectId(),
         name:name,
         lastName:lastName,
         email:email,

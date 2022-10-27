@@ -41,7 +41,15 @@ const passwordRecoveryValidation = (data) =>{
     return userPasswordRecoveryValidation.validate(data)
 }
 
+const passwordRecoveryValidationToken = (data) =>{
+    const userPasswordRecoveryValidation = joi.object({
+        token:joi.string().required()
+    })
+    // returning the login user validation
+    return userPasswordRecoveryValidation.validate(data)
+}
 // Module Exports
 module.exports.userRegistrationValidation = userRegistrationValidation
 module.exports.userLoginValidation = userLoginValidation
 module.exports.passwordRecoveryValidation = passwordRecoveryValidation
+module.exports.passwordRecoveryValidationToken = passwordRecoveryValidationToken
