@@ -21,7 +21,7 @@ function tokenAuthentication(req,res,next){
         req.user = tokenVerified // Setting request.user = Token. Contains information about user ID.
         next()
     }catch(error){
-        return res.status(401).send({message:'Please login with a valid account. Ivalid access'})
+        return res.status(401).send({message:'Please login with a valid account. Invalid access'})
     }
 }
 

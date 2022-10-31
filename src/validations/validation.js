@@ -17,7 +17,7 @@ const userRegistrationValidation = (data) =>{
         name:joi.string().required().min(3).max(256),
         lastName:joi.string().required().min(3).max(256),
         email:joi.string().required().min(3).max(256).email(),
-        password:joi.string().required().min(8).max(1026)
+        password: getPasswordValidations()
     })
     // returning the user validation 
     return userSchemaValidation.validate(data)
@@ -27,7 +27,7 @@ const userRegistrationValidation = (data) =>{
 const userLoginValidation = (data) =>{
     const userLoginSchemaValidation = joi.object({
         email:joi.string().required().min(3).max(256).email(),
-        password:joi.string().required().min(8).max(1026)
+        password:getPasswordValidations()
     })
     // returning the login user validation
     return userLoginSchemaValidation.validate(data)
@@ -36,7 +36,7 @@ const userLoginValidation = (data) =>{
 const passwordRecoveryValidation = (data) =>{
     const userPasswordRecoveryValidation = joi.object({
         email:joi.string().required().min(3).max(256).email(),
-        password:joi.string().required()
+        password:getPasswordValidations()
     })
     // returning the login user validation
     return userPasswordRecoveryValidation.validate(data)
@@ -47,7 +47,15 @@ const passwordRecoveryValidationToken = (data) =>{
         token:joi.string().required()
     })
     // returning the login user validation
-    return userPasswordRecoveryValidation.validate(data)
+    return userPasswordRecoveryValidation.validate(data) && passwordComplexityValidator(data.password)
+}
+
+function getPasswordValidations(password){
+    return joi
+        .string()
+        .required()
+        .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*?])[0-9a-zA-Z!@#$%^&*?]{8,}$/)
+        .message('The password complexity was not matched!');
 }
 // Module Exports
 module.exports.userRegistrationValidation = userRegistrationValidation

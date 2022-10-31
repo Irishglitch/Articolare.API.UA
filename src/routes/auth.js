@@ -19,6 +19,7 @@ const {userRegistrationValidation, userLoginValidation, passwordRecoveryValidati
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
 const { v4: uuidv4 } = require('uuid');
 const baseAddress = process.env.BASE_ADDRESS;
+const accessVerify = require('../validations/tokenVerification')
 
 // User registration
 router.post('/register', async(req, res) => {
@@ -84,7 +85,6 @@ router.post('/login', async(req, res) => {
 router.put('/recoveryPassword',async(req, res) => {
     const {error} = passwordRecoveryValidation(req.body)
     if(error) {
-        // Validation 1 - Summarised error message
         return res.status(400).send({message: error['details'][0]['message']})
     }
     const curUser = await User.findOne({email:req.body.email})
@@ -104,7 +104,6 @@ router.put('/recoveryPassword',async(req, res) => {
 router.patch('/recoveryPassword/:token',async(req, res) => {
     const {error} = passwordRecoveryValidation(req.body)
     if(error) {
-        // Validation 1 - Summarised error message
         return res.status(400).send({message: error['details'][0]['message']})
     }
 
@@ -135,7 +134,7 @@ router.patch('/recoveryPassword/:token',async(req, res) => {
 
 })
 
-router.delete('/users/:userId',async(req, res) => {
+router.delete('/users/:userId',accessVerify,async(req, res) => {
     const userId = req.params['userId'];
     if(!userId) {
         return res.status(400).send({message: 'Invalid userid.'})
