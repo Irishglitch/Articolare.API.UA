@@ -77,8 +77,15 @@ router.post('/login', async(req, res) => {
     }
 
     // Auth-Token Generation
-    const authToken = jsonwebtoken.sign({_id:userExists._id}, process.env.TOKEN_SECRET)
-    res.header('auth-token', authToken).send({'auth-token':authToken})
+    const authToken = jsonwebtoken.sign({
+        _id:userExists._id,
+        userName: userExists.name,
+        userLastName: userExists.lastName,
+        isActive: userExists.isActive},
+        process.env.TOKEN_SECRET,{
+            expiresIn: '3h'
+        })
+    res.header('auth-token', authToken).send({'token':authToken})
     
 })
 
