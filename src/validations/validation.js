@@ -8,6 +8,7 @@
 
 // Libraries
 const joi = require('joi')
+const { model } = require('mongoose')
 
 
 // Functions
@@ -35,19 +36,18 @@ const userLoginValidation = (data) =>{
 
 const passwordRecoveryValidation = (data) =>{
     const userPasswordRecoveryValidation = joi.object({
-        email:joi.string().required().min(3).max(256).email(),
-        password:getPasswordValidations()
+        email:joi.string().required().min(3).max(256).email()
     })
     // returning the login user validation
     return userPasswordRecoveryValidation.validate(data)
 }
 
 const passwordRecoveryValidationToken = (data) =>{
-    const userPasswordRecoveryValidation = joi.object({
+    const tokenValidations = joi.object({
         token:joi.string().required()
     })
     // returning the login user validation
-    return userPasswordRecoveryValidation.validate(data) && passwordComplexityValidator(data.password)
+    return tokenValidations.validate(data) 
 }
 
 function getPasswordValidations(password){
