@@ -13,6 +13,10 @@ const mongoose = require('mongoose')
 // Data Model
 const userSchema = mongoose.Schema({
     // This is the actual schema used within the database.
+    _id:{
+        type:mongoose.Types.ObjectId,
+        required:true
+    },
     email:{
         type:String,
         required:true, 
@@ -41,11 +45,58 @@ const userSchema = mongoose.Schema({
         type:Boolean,
         default:false
     },
-    date:{
+    isActive:{ // All accounts are going to be set as 'False' if paid, change to True.
+        type:Boolean,
+        required: true,
+        default:false
+    },
+    changePasswordNextAccess:{ // Forces user to redefine the password on the next access.
+        type:Boolean,
+        required: true,
+        default:false
+    },
+    passwordRecoveryToken:{
+        type:String,
+        required:false,
+        min:36,
+        max:36,
+        default: null
+    },
+    recoveryTokenExpireDate:{
         type:Date,
+        required: false,
+        default:null
+    },
+    createdAt:{
+        type:Date,
+        required: true,
         default:Date.now
+    },
+    updatedAt:{
+        type:Date,
+        required: false,
+        default:null
     }
 })
-
+const User = mongoose.model('users', userSchema)
+function getNewUser(
+    name,
+    lastName,
+    email,
+    hashedPassword
+){
+    return new User({
+        _id: mongoose.Types.ObjectId(),
+        name:name,
+        lastName:lastName,
+        email:email,
+        password:hashedPassword,
+        isActive: false
+    })
+}
 // Module Exports
-module.exports = mongoose.model('users', userSchema)
+module.exports ={
+    User: User,
+    GetNewUser:getNewUser
+}
+
