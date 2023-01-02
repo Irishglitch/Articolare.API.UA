@@ -66,26 +66,26 @@ router.post('/login', async(req, res) => {
     const {error} = userLoginValidation(req.body)
     if(error){
         // Validation 1 - Summarised error message
-        return res.status(400).send({message:error['details'][0]['message']})
+        return res.status(401).send({message:error['details'][0]['message']})
     }
 
     // Validation 2 - Check user is not registered
     const userExists = await User.findOne({email:req.body.email})
     if(!userExists){
-        return res.status(400).send({message:'Invalid credentials information. Please check your credentials an try again.'})
+        return res.status(401).send({message:'Invalid credentials information. Please check your credentials an try again.'})
     }
 
     // Validation 3 - Password decription and validation
     const userPasswordValidation = await bcryptjs.compare(req.body.password, userExists.password)
     if(!userPasswordValidation){
-        return res.status(400).send({message:'Invalid credentials information. Please check your credentials an try again.'})
+        return res.status(401).send({message:'Invalid credentials information. Please check your credentials an try again.'})
     }
 
     // Auth-Token Generation
     const authToken = jsonwebtoken.sign({
         _id:userExists._id,
-        userName: userExists.name,
-        userLastName: userExists.lastName,
+        userFullName: `${userExists.name} ${userExists.lastName}`,
+        userMail: userExists.email,
         isActive: userExists.isActive},
         process.env.TOKEN_SECRET,{
             expiresIn: '3h'
