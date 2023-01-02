@@ -15,7 +15,12 @@ const jsonwebtoken = require('jsonwebtoken')
 
 const User = require('../models/User').User
 const UserHandler = require('../models/User')
-const {userRegistrationValidation, userLoginValidation, passwordRecoveryValidation} = require('../validations/validation') // All validations for login and registration.
+const {
+    userRegistrationValidation,
+    userLoginValidation, 
+    passwordRecoveryValidation,
+    passwordRecoveryValidationToken
+} = require('../validations/validation') // All validations for login and registration.
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
 const { v4: uuidv4 } = require('uuid');
 const baseAddress = process.env.BASE_ADDRESS;
@@ -108,11 +113,12 @@ router.put('/recoveryPassword',async(req, res) => {
     res.end();
 })
 
-router.patch('/recoveryPassword/:token',async(req, res) => {
-    const {error} = passwordRecoveryValidation(req.body)
-    if(error) {
-        return res.status(400).send({message: error['details'][0]['message']})
-    }
+router.get('/recoveryPassword/:token',async(req, res) => {
+    // const {error} = passwordRecoveryValidationToken(req.params.token)
+    //TODO - //Implement token validation
+    // if(error) {
+    //     return res.status(400).send({message: error['details'][0]['message']})
+    // }
 
     const token = req.params['token'];
     const curUser = await User.findOne({passwordRecoveryToken:token})
