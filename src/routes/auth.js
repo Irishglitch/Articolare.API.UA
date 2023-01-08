@@ -23,7 +23,7 @@ const {
 } = require('../validations/validation') // All validations for login and registration.
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
 const { v4: uuidv4 } = require('uuid');
-const baseAddress = process.env.BASE_ADDRESS;
+const clientAddress = process.env.Client_ADDRESS;
 const accessVerify = require('../validations/tokenVerification')
 
 // User registration
@@ -225,7 +225,7 @@ router.put('/confirmEmail',async(req, res) => {
 })
 
 function getPassRecoveryMailBody(userName, token){
-    const link = `${baseAddress}/recoveryPassword/${token}`
+    const link = `${clientAddress}/recoveryPassword/${token}`
     const mailBase = `<!DOCTYPE htmlPUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Articolare</title><style type="text/css">body{Margin:0;padding:0;background-color:#fff}table{border-spacing:0}td{padding:0}img{border:0}.wrapper{width:100%;table-layout:fixed;background-color:#fff;padding-bottom:40px}.webkit{max-width:600px;background-color:#fff}.outer{Margin:0 auto;width:100%;max-width:600px;border-spacing:0;font-family:sans-serif;color:#4a4a4a}</style></head><body><center class="wrapper"><div class="webkit"><table class="outer" align="center"><tr><td><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:center"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/mainLogoLight.png" width="180" alt="Logo" title="Logo"></a></td></tr></table></td></tr><tr><td><br><br><p>Hello ${userName},</p><a href="${link}" target="_blank" style="max-width:100;font-weight:400">This is a password recovery email.</a><br></td></tr><tr><td><br><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:left"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/better-writing.png" width="600" alt="Logo" title="Logo"></a></td></tr></table><p style="font-size:13px">By clicking on the link above you are agreeing to our terms andconditions.</p><p style="font-size:13px">All rights reserved. Copyright © 2021 Foireann | Made with<spam style="color:red;font-size:large">:hearts:</spam>by ourteam in London, Lisbon, &Milano.</p></td></tr></table></div></center></body></html>`
     return mailBase;
 }
@@ -236,7 +236,7 @@ function getDeletedAccountMailBody(userName){
 }
 
 function getConfirmationMailBody(userName, token){
-    const link = `${baseAddress}/recoveryPassword/${token}`
+    const link = `${clientAddress}/confirmEmail/${token}`
     const mailBase = `<!DOCTYPE htmlPUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Articolare</title><style type="text/css">body{Margin:0;padding:0;background-color:#fff}table{border-spacing:0}td{padding:0}img{border:0}.wrapper{width:100%;table-layout:fixed;background-color:#fff;padding-bottom:40px}.webkit{max-width:600px;background-color:#fff}.outer{Margin:0 auto;width:100%;max-width:600px;border-spacing:0;font-family:sans-serif;color:#4a4a4a}</style></head><body><center class="wrapper"><div class="webkit"><table class="outer" align="center"><tr><td><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:center"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/mainLogoLight.png" width="180" alt="Logo" title="Logo"></a></td></tr></table></td></tr><tr><td><br><br><p>Hello ${userName},</p><a href="${link}" target="_blank" style="max-width:100;font-weight:400">This is an account confirmation email.</a><br><></td></tr><tr><td><br><table style="width:100%;border-spacing:0;padding-top:3rem"><tr><td style="text-align:left"><a href="https://articolare.com"><img src="https://storage.googleapis.com/assets-articolare/better-writing.png" width="600" alt="Logo" title="Logo"></a></td></tr></table><p style="font-size:13px">By clicking on the link above you are agreeing to our terms andconditions.</p><p style="font-size:13px">All rights reserved. Copyright © 2021 Foireann | Made with<spam style="color:red;font-size:large">:hearts:</spam>by ourteam in London, Lisbon, &Milano.</p></td></tr></table></div></center></body></html>`
     return mailBase;
 }
