@@ -62,6 +62,13 @@ const userSchema = mongoose.Schema({
         max:36,
         default: null
     },
+    activationToken:{
+        type:String,
+        required:false,
+        min:36,
+        max:36,
+        default: null
+    },
     recoveryTokenExpireDate:{
         type:Date,
         required: false,
@@ -83,7 +90,8 @@ function getNewUser(
     name,
     lastName,
     email,
-    hashedPassword
+    hashedPassword, 
+    newActivationToken
 ){
     return new User({
         _id: mongoose.Types.ObjectId(),
@@ -91,6 +99,7 @@ function getNewUser(
         lastName:lastName,
         email:email,
         password:hashedPassword,
+        activationToken: newActivationToken,
         isActive: false
     })
 }
