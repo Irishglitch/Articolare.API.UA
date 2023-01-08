@@ -23,7 +23,8 @@ const {
 } = require('../validations/validation') // All validations for login and registration.
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
 const { v4: uuidv4 } = require('uuid');
-const baseAddress = process.env.BASE_ADDRESS;
+// const baseAddress = process.env.BASE_ADDRESS; REMOVED AS REQUESTED BY DEVELOPER
+const clientAddress = process.env.Client_BASE_ADDRESS;
 const accessVerify = require('../validations/tokenVerification')
 
 // User registration
@@ -205,7 +206,7 @@ function sendMail(mailAddres,subject, body){
     });
 }
 
-router.put('/confirmEmail',async(req, res) => {
+router.put('/confirmEmail/:token',async(req, res) => {
     const {error} = passwordRecoveryValidation(req.body) //TODO - User a meaningful name
     if(error) {
         // Validation 1 - Summarised error message
