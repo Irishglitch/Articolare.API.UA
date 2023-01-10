@@ -115,7 +115,7 @@ router.put('/recoveryPassword',async(req, res) => {
     res.end();
 })
 
-router.get('/recoveryPassword/:token',async(req, res) => {
+router.put('/recoveryPassword/:token',async(req, res) => {
     // const {error} = passwordRecoveryValidationToken(req.params.token)
     //TODO - //Implement token validation
     // if(error) {
@@ -215,7 +215,12 @@ router.put('/confirmEmail/:token',async(req, res) => {
         return res.status(400).send({message: error['details'][0]['message']})
     }
     const curUser = await User.findOne({activationToken:token})
-    if(curUser && !curUser.isActive){
+    if(curUser){
+
+        if(curUser.isActive){
+           return res.status(400).send({message: 'Error: User already active.'});
+        }
+
         const now = Date.now();
         curUser.isActive = true;
         curUser.updatedAt = now;
