@@ -208,8 +208,11 @@ function sendMail(mailAddres,subject, body){
 }
 
 router.put('/confirmEmail/:token',async(req, res) => {
-    const {error} = passwordRecoveryValidation(req.body) //TODO - User a meaningful name
+    // const {error} = passwordRecoveryValidation(req.body) //TODO - User a meaningful name
     const token = req.params['token'];
+    if (token==null){
+        return res.status(400).send({message: error['details'][0]['message']})
+    }
     if(error) {
         // Validation 1 - Summarised error message
         return res.status(400).send({message: error['details'][0]['message']})
