@@ -1,6 +1,6 @@
 /**
  * The auth.js provides essential information about all required user authentication.
- * This file should not be amended without confirmation first. 
+ * This file should not be amended without confirmation first.
  * @version 1.0.1
  * @author Murilo Silvestre | Property of Articolare Ltd
  * @email info@foireann.com
@@ -17,7 +17,7 @@ const User = require('../models/User').User
 const UserHandler = require('../models/User')
 const {
     userRegistrationValidation,
-    userLoginValidation, 
+    userLoginValidation,
     passwordRecoveryValidation,
     passwordRecoveryValidationToken
 } = require('../validations/validation') // All validations for login and registration.
@@ -39,10 +39,11 @@ router.post('/register', async(req, res) => {
      if(userAlreadyExists){
          return res.status(400).send({message:'Email already in use'})
      }
- 
+
      // Creating a hash representation for user password.
      const salt = await bcryptjs.genSalt(8)
      const hashedPassword = await bcryptjs.hash(req.body.password,salt)
+     const activationToken =  uuidv4()
 
      // Inserting data into DB.
     const addNewUser = UserHandler.GetNewUser(
@@ -50,13 +51,13 @@ router.post('/register', async(req, res) => {
         req.body.lastName,
         req.body.email,
         hashedPassword,
-        uuidv4()
+        activationToken
     )
      // Try catch to validate and enter data into DB.
      try{
          const userAddedDB = await addNewUser.save()
          res.send(userAddedDB)
-         const body = getConfirmationMailBody(req.body.name, uuidv4());
+         const body = getConfirmationMailBody(req.body.name, activationToken);
          sendMail(req.body.email, 'Articolare - email confirmation.', body);
      }catch(error){
          res.status(400).send({message:error})
@@ -93,7 +94,7 @@ router.post('/login', async(req, res) => {
             expiresIn: '3h'
         })
     res.header('auth-token', authToken).send({'token':authToken})
-    
+
 })
 
 router.put('/recoveryPassword',async(req, res) => {
@@ -210,13 +211,9 @@ function sendMail(mailAddres,subject, body){
 router.put('/confirmEmail/:token',async(req, res) => {
     // const {error} = passwordRecoveryValidation(req.body) //TODO - User a meaningful name
     const token = req.params['token'];
-    if (token==null){
-        return res.status(400).send({message: error['details'][0]['message']})
-    }
-    if(error) {
-        // Validation 1 - Summarised error message
-        return res.status(400).send({message: error['details'][0]['message']})
-    }
+
+
+
     const curUser = await User.findOne({activationToken:token})
     if(curUser){
 
