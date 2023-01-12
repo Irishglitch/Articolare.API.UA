@@ -22,7 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ce7f109-63bd-4a8d-9a81-371614026d34" name="Default Changelist" comment="add getPassRecoveryMailBody function" />
+    <list default="true" id="5ce7f109-63bd-4a8d-9a81-371614026d34" name="Default Changelist" comment="add getPassRecoveryMailBody function">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,6 +110,7 @@
       <workItem from="1673341007685" duration="541000" />
       <workItem from="1673358004909" duration="691000" />
       <workItem from="1673358817505" duration="430000" />
+      <workItem from="1673551760898" duration="1113000" />
     </task>
     <task id="LOCAL-00001" summary="add getPassRecoveryMailBody function">
       <created>1666902210123</created>
