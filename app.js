@@ -18,10 +18,10 @@ require('dotenv/config')
 app.use(bodyParser.json())
 const userAuthRoute = require('./src/routes/auth')
 const userDetailsGet = require('./src/routes/retrival')
-app.use(cors({
-    origin: 'http://localhost:8080'
-}))
-
+// app.use(cors({
+//     origin: 'http://localhost:8080',
+// }))
+app.use(cors())
 // Endpoints
 app.use('/', userAuthRoute) // For user access login and register
 app.use('/', userDetailsGet)
