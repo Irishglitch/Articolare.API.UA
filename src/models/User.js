@@ -83,7 +83,13 @@ const userSchema = mongoose.Schema({
         type:Date,
         required: false,
         default:null
+    },
+    language:{
+        type:String,
+        required: false,
+        default: null
     }
+
 })
 const User = mongoose.model('users', userSchema)
 function getNewUser(

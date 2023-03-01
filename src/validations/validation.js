@@ -1,6 +1,6 @@
 /**
  * The validation.js provides essential information about all required user authentication.
- * This file should not be amended without confirmation first. 
+ * This file should not be amended without confirmation first.
  * @version 1.0.1
  * @author Murilo Silvestre | Property of Articolare Ltd
  * @email info@foireann.com
@@ -12,19 +12,20 @@ const { model } = require('mongoose')
 
 
 // Functions
-// User registration validation 
+// User registration validation
 const userRegistrationValidation = (data) =>{
     const userSchemaValidation = joi.object({
         name:joi.string().required().min(3).max(256),
         lastName:joi.string().required().min(3).max(256),
         email:joi.string().required().min(3).max(256).email(),
-        password: getPasswordValidations()
+        password: getPasswordValidations(),
+        languageChoice:joi.string().required().min(3).max(256),
     })
-    // returning the user validation 
+    // returning the user validation
     return userSchemaValidation.validate(data)
 }
 
-// Login vaidations
+// Login validations
 const userLoginValidation = (data) =>{
     const userLoginSchemaValidation = joi.object({
         email:joi.string().required().min(3).max(256).email(),
@@ -47,7 +48,7 @@ const passwordRecoveryValidationToken = (data) =>{
         token:joi.string().required()
     })
     // returning the login user validation
-    return tokenValidations.validate(data) 
+    return tokenValidations.validate(data)
 }
 
 function getPasswordValidations(password){

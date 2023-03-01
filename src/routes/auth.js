@@ -50,6 +50,7 @@ router.post('/register', async(req, res) => {
         req.body.name,
         req.body.lastName,
         req.body.email,
+        req.body.languageChoice,
         hashedPassword,
         activationToken
     )
