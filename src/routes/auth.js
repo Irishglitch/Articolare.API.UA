@@ -50,9 +50,9 @@ router.post('/register', async(req, res) => {
         req.body.name,
         req.body.lastName,
         req.body.email,
-        req.body.languageChoice,
         hashedPassword,
-        activationToken
+        activationToken,
+        req.body.languageChoice
     )
      // Try catch to validate and enter data into DB.
      try{

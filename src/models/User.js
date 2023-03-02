@@ -1,13 +1,13 @@
 /**
  * The User.js provides essential information about user structure within the DB.
- * This file should not be amended without confirmation first. 
+ * This file should not be amended without confirmation first.
  * @version 1.0.1
  * @author Murilo Silvestre | Property of Articolare Ltd
  * @email info@foireann.com
  */
 
 
-// Libraries 
+// Libraries
 const mongoose = require('mongoose')
 
 // Data Model
@@ -19,25 +19,25 @@ const userSchema = mongoose.Schema({
     },
     email:{
         type:String,
-        required:true, 
+        required:true,
         min:3,
         max:256
     },
     password:{
         type:String,
-        required:true, 
+        required:true,
         min:8,
         max:1024
     },
     name:{
         type:String,
-        required:true, 
+        required:true,
         min:3,
         max:256
     },
     lastName:{
         type:String,
-        required:true, 
+        required:true,
         min:3,
         max:256
     },
@@ -96,8 +96,9 @@ function getNewUser(
     name,
     lastName,
     email,
-    hashedPassword, 
-    newActivationToken
+    hashedPassword,
+    newActivationToken,
+    language,
 ){
     return new User({
         _id: mongoose.Types.ObjectId(),
@@ -106,7 +107,8 @@ function getNewUser(
         email:email,
         password:hashedPassword,
         activationToken: newActivationToken,
-        isActive: false
+        isActive: false,
+        language: language
     })
 }
 // Module Exports

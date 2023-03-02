@@ -19,7 +19,7 @@ const userRegistrationValidation = (data) =>{
         lastName:joi.string().required().min(3).max(256),
         email:joi.string().required().min(3).max(256).email(),
         password: getPasswordValidations(),
-        languageChoice:joi.string().required().min(3).max(256),
+        languageChoice:joi.string().required().min(2).max(256),
     })
     // returning the user validation
     return userSchemaValidation.validate(data)
