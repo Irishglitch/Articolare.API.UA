@@ -25,8 +25,6 @@
     <list default="true" id="5ce7f109-63bd-4a8d-9a81-371614026d34" name="Default Changelist" comment="add getPassRecoveryMailBody function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/validations/validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/validations/validation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,20 +50,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Projects/Articolare.API.UA",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Projects/Articolare.API.UA&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Node.js/Chrome.UserAuthAPi">
     <configuration name="UserAuthAPi" type="ChromiumRemoteDebugType" factoryName="Chromium Remote" port="3001" isV8Legacy="true">
       <option name="v8Legacy" value="true" />
@@ -115,6 +113,10 @@
       <workItem from="1673556538491" duration="2705000" />
       <workItem from="1677705036850" duration="2466000" />
       <workItem from="1677742272342" duration="1448000" />
+      <workItem from="1677785427058" duration="24000" />
+      <workItem from="1677785464023" duration="956000" />
+      <workItem from="1677869339203" duration="3036000" />
+      <workItem from="1677923173407" duration="970000" />
     </task>
     <task id="LOCAL-00001" summary="add getPassRecoveryMailBody function">
       <created>1666902210123</created>

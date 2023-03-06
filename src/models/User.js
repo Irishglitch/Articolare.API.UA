@@ -41,9 +41,10 @@ const userSchema = mongoose.Schema({
         min:3,
         max:256
     },
-    accountTypePremium:{ // All accounts are going to be set as 'False' if paid, change to True.
-        type:Boolean,
-        default:false
+    accountType:{ // All accounts are going to be set as 'False' if paid, change to True.
+        type:String,
+        required: false,
+        default: null
     },
     isActive:{ // All accounts are going to be set as 'False' if paid, change to True.
         type:Boolean,
