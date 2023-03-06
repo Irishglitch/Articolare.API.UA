@@ -19,7 +19,8 @@ const {
     userRegistrationValidation,
     userLoginValidation,
     passwordRecoveryValidation,
-    passwordRecoveryValidationToken
+    passwordRecoveryValidationToken,
+    confirmEmailValidation
 } = require('../validations/validation') // All validations for login and registration.
 const { default: mongoose } = require('mongoose') // Ability to connect to the DB.
 const { v4: uuidv4 } = require('uuid');
@@ -210,14 +211,11 @@ function sendMail(mailAddres,subject, body){
 }
 
 router.put('/confirmEmail/:token',async(req, res) => {
-    // const {error} = passwordRecoveryValidation(req.body) //TODO - User a meaningful name
+    const {error} = confirmEmailValidation(req.body)
     const token = req.params['token'];
-
-
 
     const curUser = await User.findOne({activationToken:token})
     if(curUser){
-
         if(curUser.isActive){
            return res.status(400).send({message: 'Error: User already active.'});
         }

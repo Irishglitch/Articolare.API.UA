@@ -44,13 +44,20 @@ const passwordRecoveryValidation = (data) =>{
 }
 
 const passwordRecoveryValidationToken = (data) =>{
+    return checkRequiredToken(data);
+}
+
+const confirmEmailValidation = (data) =>{
+    return checkRequiredToken(data);
+}
+
+function checkRequiredToken(data){
     const tokenValidations = joi.object({
         token:joi.string().required()
     })
     // returning the login user validation
     return tokenValidations.validate(data)
 }
-
 function getPasswordValidations(password){
     return joi
         .string()
@@ -63,3 +70,4 @@ module.exports.userRegistrationValidation = userRegistrationValidation
 module.exports.userLoginValidation = userLoginValidation
 module.exports.passwordRecoveryValidation = passwordRecoveryValidation
 module.exports.passwordRecoveryValidationToken = passwordRecoveryValidationToken
+module.exports.confirmEmailValidation = confirmEmailValidation

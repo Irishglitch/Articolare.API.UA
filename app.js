@@ -1,5 +1,5 @@
 /**
- * The app.js provides essential information to start and run this RESTful API for Articolare's user management and user authentication. 
+ * The app.js provides essential information to start and run this RESTful API for Articolare's user management and user authentication.
  * @version 1.0.1
  * @author Murilo Silvestre | Property of Articolare Ltd
  * @email info@foireann.com
@@ -18,6 +18,7 @@ require('dotenv/config')
 app.use(bodyParser.json())
 const userAuthRoute = require('./src/routes/auth')
 const userDetailsGet = require('./src/routes/retrival')
+const paymentsRoutes = require('./src/routes/payments')
 // app.use(cors({
 //     origin: 'http://localhost:8080',
 // }))
@@ -25,7 +26,7 @@ app.use(cors())
 // Endpoints
 app.use('/', userAuthRoute) // For user access login and register
 app.use('/', userDetailsGet)
-
+app.use('/',paymentsRoutes)
 // Connection to the mongoDB
 mongoose.connect(process.env.DB_CONNECTOR, () =>{
     console.log('DB connection is running!')
