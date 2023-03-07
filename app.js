@@ -19,6 +19,7 @@ app.use(bodyParser.json())
 const userAuthRoute = require('./src/routes/auth')
 const userDetailsGet = require('./src/routes/retrival')
 const paymentsRoutes = require('./src/routes/payments')
+const subscription = require('./src/models/Subscription')
 // app.use(cors({
 //     origin: 'http://localhost:8080',
 // }))
@@ -32,6 +33,9 @@ mongoose.connect(process.env.DB_CONNECTOR, () =>{
     console.log('DB connection is running!')
 })
 
+subscription.PopulateSubscriptionTable()
+    .then(()=> console.log('Subscription table populated with success.'))
+    .catch(() => console.error('Error population subscription table.'))
 // Port
 app.listen(3000, () =>{
     console.log('Server is running!')
