@@ -25,8 +25,8 @@ const subscriptionSchema = mongoose.Schema({
     },
     features:{
         type: Map,
-        of: Boolean
-
+        of: Boolean,
+        required:true
     }})
 
 const Subscription = mongoose.model('subscription', subscriptionSchema)

@@ -31,7 +31,7 @@ const emailCustomerAboutFailedPayment = (session) => {
 router.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
     const payload = request.body;
     const sig = request.headers['stripe-signature'];
-    console.log('test',payload)
+
     let event;
 
     try {
