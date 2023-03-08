@@ -1,5 +1,5 @@
 export default class MailService {
-    function sendMail(mailAddres,subject, body){
+    sendMail(mailAddres,subject, body){
         const user = process.env.MAIL_ADDRESS;
         const pass = process.env.PASS;
         var nodemailer = require('nodemailer');
